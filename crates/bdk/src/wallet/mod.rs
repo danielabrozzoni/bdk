@@ -1168,10 +1168,12 @@ impl<D> Wallet<D> {
         psbt: &mut psbt::PartiallySignedTransaction,
         sign_options: SignOptions,
     ) -> Result<bool, Error> {
+        println!("1");
         // This adds all the PSBT metadata for the inputs, which will help us later figure out how
         // to derive our keys
         self.update_psbt_with_descriptor(psbt)?;
 
+        println!("1");
         // If we aren't allowed to use `witness_utxo`, ensure that every input (except p2tr and finalized ones)
         // has the `non_witness_utxo`
         if !sign_options.trust_witness_utxo
@@ -1185,6 +1187,7 @@ impl<D> Wallet<D> {
             return Err(Error::Signer(signer::SignerError::MissingNonWitnessUtxo));
         }
 
+        println!("1");
         // If the user hasn't explicitly opted-in, refuse to sign the transaction unless every input
         // is using `SIGHASH_ALL` or `SIGHASH_DEFAULT` for taproot
         if !sign_options.allow_all_sighashes
@@ -1198,13 +1201,16 @@ impl<D> Wallet<D> {
             return Err(Error::Signer(signer::SignerError::NonStandardSighash));
         }
 
+        println!("1");
         for signer in self
             .signers
             .signers()
             .iter()
             .chain(self.change_signers.signers().iter())
         {
+            println!("2");
             signer.sign_transaction(psbt, &sign_options, &self.secp)?;
+            println!("2");
         }
 
         // attempt to finalize

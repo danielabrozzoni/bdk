@@ -91,6 +91,8 @@ impl TransactionSigner for HWISigner {
         _sign_options: &crate::SignOptions,
         _secp: &crate::wallet::utils::SecpCtx,
     ) -> Result<(), SignerError> {
+        println!("{}", psbt);
+        println!("{:?}", self.client.sign_tx(psbt));
         psbt.combine(self.client.sign_tx(psbt)?.psbt)
             .expect("Failed to combine HW signed psbt with passed PSBT");
         Ok(())
