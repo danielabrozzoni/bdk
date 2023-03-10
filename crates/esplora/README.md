@@ -22,8 +22,7 @@ For async-only (with https):
 bdk_esplora = { version = "0.1", features = ["async-https"] }
 ```
 
-To use the extension trait:
-
+To use the extension traits:
 ```rust,no_run
 // for blocking
 use bdk_esplora::EsploraExt;
