@@ -11,7 +11,8 @@ members = [
     "example-crates/wallet_esplora",
     "example-crates/wallet_esplora_async",
     "nursery/tmp_plan",
-    "nursery/coin_select"
+    "nursery/coin_select",
+    "nursery/nakamoto"
 ]
 
 [workspace.package]
